@@ -23,11 +23,11 @@ INSERT INTO student VALUES(004,'aliya',123,'F',9207248667);
 INSERT INTO student VALUES(005,'jasmine',124,'F',9207248668);
 /* 
 Roll_no  Name           Dept_id     Gender        Contact_no
-1	     alvin lal	    120	        M	           9207248664
-2	     amal tom	    120	        M	           9207248665
-3	     allen joseph   122	        M	           9207248666
-4	     aliya	        123	        F	           9207248667
-5	     jasmine	    124	        F	           9207248668
+1	 alvin lal	120	        M	   9207248664
+2	 amal tom	120	        M	   9207248665
+3	 allen joseph   122	        M	   9207248666
+4	 aliya	        123	        F	   9207248667
+5	 jasmine	124	        F	   9207248668
 */
 
 INSERT INTO department VALUES(120,'ELECTRICAL');
@@ -37,7 +37,7 @@ INSERT INTO department VALUES(123,'COMPUTER');
 INSERT INTO department VALUES(124,'AUTOMOBILE');
 
 /*
-Dept_id  Name
+Dept_id      Name
 120	     ELECTRICAL
 121	     MECHANICAL
 122	     CHEMICAL
@@ -49,16 +49,16 @@ Dept_id  Name
 --1b--
 UPDATE student SET Contact_no=123456789 WHERE Roll_no=005;
 /*
-Roll_no  Name           Dept_id     Gender       Contact_no
-5	    jasmine	        124	        F	         123456789
+Roll_no      Name           Dept_id     Gender       Contact_no
+5	    jasmine	        124	F	      123456789
 */
 
 --2a--
 SELECT * FROM student WHERE Gender='F' ORDER BY Name ASC;
 /*
 Roll_no  Name           Dept_id     Gender       Contact_no
-4	    aliya	        123	        F	        9207248667
-5	    jasmine	        124	        F	        123456789
+4	 aliya	        123	        F	 9207248667
+5	 jasmine	124	        F	 123456789
 */
 --2b--
 SELECT COUNT(*) FROM student WHERE Dept_id='120' ;
@@ -69,20 +69,20 @@ SELECT COUNT(*) FROM student WHERE Dept_id='120' ;
 CREATE VIEW STUDENTVIEW AS SELECT * FROM student ;
 SELECT * FROM STUDENTVIEW ; --to display the view
 /*
-Roll_no  Name           Dept_id     Gender       Contact_no
-1	    alvin lal	    120	        M	         9207248664
-2	    amal tom	    120	        M	         9207248665
-3	    allen joseph	122	        M	         9207248666
-4	    aliya	        123	        F	         9207248667
-5	    jasmine	        124	        F	         123456789
+Roll_no  Name           Dept_id     Gender        Contact_no
+1	 alvin lal	120	        M	  9207248664
+2	 amal tom	120	        M	  9207248665
+3	 allen joseph	122	        M	  9207248666
+4	 aliya	        123	        F	  9207248667
+5	 jasmine	124	        F	  123456789
 */
 --4a--
 CREATE PROCEDURE GETNAMECONTACT AS SELECT Name,Contact_no FROM student ;
 EXEC GETNAMECONTACT;        --to execute the procedure
 /*
 Name            Contact_no
-alvin lal	    9207248664
-amal tom	    9207248665
+alvin lal	9207248664
+amal tom	9207248665
 allen joseph	9207248666
 aliya	        9207248667
 jasmine	        123456789
@@ -120,10 +120,10 @@ INSERT INTO customer VALUES('102','philipe','coutinho','kottayam',920724444);
 INSERT INTO customer VALUES('103','bale','gareth','kochi',9207248664);
 INSERT INTO customer VALUES('104','paulo','dybala','kollam',9207233664);
 /*
-Cust_id	Fname	    Lname	    Area	    Phone_number
+Cust_id	    Fname	    Lname	    Area	    Phone_number
 100	    lionel	    messi	    kochi	    9207248664
 101	    johns	    cena	    kollam	    9207248665
-102	    philipe	    coutinho	kottayam	920724444
+102	    philipe	    coutinho	    kottayam	    920724444
 103	    bale	    gareth	    kochi	    9207248664
 104	    paulo	    dybala	    kollam	    9207233664
 */
@@ -133,7 +133,7 @@ INSERT INTO invoice VALUES('122','102','15/9/08');
 INSERT INTO invoice VALUES('123','103','13/2/08');
 INSERT INTO invoice VALUES('124','104','13/12/08');
 /*
-Inv_no  Cust_id  Issue_date
+Inv_no      Cust_id  Issue_date
 120	    100	     2008-07-13
 121	    101	     2008-08-14
 122	    102	     2008-09-15
@@ -143,7 +143,7 @@ Inv_no  Cust_id  Issue_date
 --1b--
 UPDATE invoice SET Issue_date='24/7/8' WHERE Cust_id='101';
 /*
-Inv_no  Cust_id  Issue_date
+Inv_no      Cust_id  Issue_date
 121	    101	     2008-07-24
 */
 --2a--
@@ -156,20 +156,20 @@ Issue_date
 SELECT Fname,Inv_no FROM invoice JOIN customer ON customer.Cust_id=invoice.Cust_id;
 /*
 Fname    Inv_no
-lionel	120
-johns	121
-philipe	122
-bale	123
-paulo	124
+lionel	 120
+johns	 121
+philipe	 122
+bale	 123
+paulo	 124
 */
 --3--
 CREATE VIEW CUSTOMERVIEW AS SELECT * FROM customer ;
 SELECT * FROM CUSTOMERVIEW;
 /*
-Cust_id	Fname	    Lname	    Area	    Phone_number
+Cust_id	    Fname	    Lname	    Area	    Phone_number
 100	    lionel	    messi	    kochi	    9207248664
 101	    johns	    cena	    kollam	    9207248665
-102	    philipe	    coutinho	kottayam	920724444
+102	    philipe	    coutinho	    kottayam	    920724444
 103	    bale	    gareth	    kochi	    9207248664
 104	    paulo	    dybala	    kollam	    9207233664
 */
@@ -188,12 +188,12 @@ dybala
 CREATE PROCEDURE GETCUSTDETAILS AS SELECT * FROM customer ORDER BY Fname ASC ;
 EXEC GETCUSTDETAILS;
 /*
-Cust_id	Fname	    Lname	    Area	    Phone_number
+Cust_id	    Fname	    Lname	    Area	    Phone_number
 103	    bale	    gareth	    kochi	    9207248664
 101	    johns	    cena	    kollam	    9207248665
 100	    lionel	    messi	    kochi	    9207248664
 104	    paulo	    dybala	    kollam	    9207233664
-102	    philipe	    coutinho	kottayam    920724444
+102	    philipe	    coutinho	    kottayam        920724444
 */
 
 --QUESTION NO 3--
@@ -219,20 +219,20 @@ INSERT INTO customer VALUES(102,'amal','amal villa','kochi');
 INSERT INTO customer VALUES(103,'amal','amal villa','south kochi');
 INSERT INTO customer VALUES(104,'jay',null,'alapuzha');
 /*
-Cno     Cname   Address         City
-100	    john	NULL	        kochi
+Cno         Cname       Address             City
+100	    john	NULL	            kochi
 101	    alvin	alvin villa	    kakkanad
 102	    amal	amal villa	    kochi
 103	    amal	amal villa	    south kochi
-104	    jay	    NULL	        alapuzha
+104	    jay	        NULL	            alapuzha
 */
 INSERT INTO sales VALUES(120,'3/1/2012',100);
 INSERT INTO sales VALUES(121,'3/2/2012',101);
 INSERT INTO sales VALUES(122,'3/3/2012',102);
 INSERT INTO sales VALUES(123,'4/3/2012',103);
 INSERT INTO sales VALUES(124,'7/3/2012',104);
-/*
-Orderno  Orderdate      Cno
+/* 
+Orderno     Orderdate       Cno
 120	    2012-01-03	    100
 121	    2012-02-03	    101
 122	    2012-03-03	    102
@@ -242,8 +242,8 @@ Orderno  Orderdate      Cno
 --1b--
 UPDATE customer SET Address='john villa' WHERE Cname='john';
 /*
-Cno     Cname   Address         City
-100	   john	   john villa	kochi
+Cno        Cname   Address         City
+100	   john	   john villa	   kochi
 */
 --2a--
 SELECT COUNT(*)  FROM sales WHERE Orderdate>'3/3/2012';
@@ -259,12 +259,12 @@ SELECT Orderno FROM sales JOIN customer ON customer.Cno=sales.Cno AND customer.C
 CREATE VIEW CUSTOMERVIEW AS SELECT * FROM customer ;
 SELECT * FROM CUSTOMERVIEW ;
 /*
-Cno     Cname   Address         City
+Cno         Cname       Address             City
 100	    john	john villa	    kochi
 101	    alvin	alvin villa	    kakkanad
 102	    amal	amal villa	    kochi
 103	    amal	amal villa	    south kochi
-104	    jay	    NULL	        alapuzha
+104	    jay	        NULL	            alapuzha
 */
 --4a--
 CREATE PROCEDURE GETDISNAMEA AS SELECT DISTINCT Cname FROM customer WHERE Cname LIKE 'A%' ;
@@ -278,7 +278,7 @@ amal
 CREATE PROCEDURE GETNULLADDRESS AS SELECT * FROM customer WHERE Address IS NULL;
 EXEC GETNULLADDRESS;
 /*
-Cno     Cname   Address         City
+Cno         Cname   Address             City
 104	    jay	    NULL	        alapuzha
 */
 
@@ -311,7 +311,7 @@ eno	    name	designation	    salary
 101	    Alvin	team member	    4000.00
 102	    Glenn	team head	    6000.00
 103	    Rivin	team member	    4000.00
-104	    Basil	manager	        10000.00
+104	    Basil	manager	            10000.00
 */
 INSERT INTO project VALUES(120,'Online Shop',100);
 INSERT INTO project VALUES(121,'Social network site',101);
@@ -319,7 +319,7 @@ INSERT INTO project VALUES(122,'Chat app',102);
 INSERT INTO project VALUES(123,'Recipe app',103);
 INSERT INTO project VALUES(124,'Taxi app',104);
 /*
-PID     ProjName            eno
+PID         ProjName            eno
 120	    Online Shop	        100
 121	    Social network site	101
 122	    Chat app	        102
@@ -329,7 +329,7 @@ PID     ProjName            eno
 --1b--
 UPDATE employee SET designation='team member' WHERE name='Albert';
 /*
-eno     name    designation         salary
+eno         name        designation         salary
 100	    Albert	team member  	    1000.00
 */
 --2a--
@@ -338,7 +338,7 @@ SELECT * FROM employee ORDER BY name;
 eno	    name	designation	    salary
 100	    Albert	team member	    1000.00
 101	    Alvin	team member	    4000.00
-104	    Basil	manager	        10000.00
+104	    Basil	manager	            10000.00
 102	    Glenn	team head	    6000.00
 103	    Rivin	team member	    4000.00
 */
@@ -360,9 +360,9 @@ SELECT * FROM EMPLOYEEVIEW;
 eno	    name	 designation	    salary
 100	    Albert	 team member	    1000.00
 101	    Alvin	 team member	    4000.00
-102	    Glenn	 team head	        6000.00
+102	    Glenn	 team head	    6000.00
 103	    Rivin	 team member	    4000.00
-104	    Basil	 manager	        10000.00
+104	    Basil	 manager	    10000.00
 */
 --4a--
 CREATE PROCEDURE GETSALARY5000 AS SELECT name FROM employee WHERE salary<5000 ;
@@ -378,7 +378,7 @@ CREATE PROCEDURE GETMINMAXAVG AS SELECT designation,MIN(salary) AS MINIMUMSALARY
 EXEC GETMINMAXAVG;
 /*
 designation	    MINIMUMSALARY	MAXIMUMSALARY	AVGSALARY
-manager	        10000.00	    10000.00	    10000.000000
+manager	            10000.00	        10000.00	10000.000000
 team head	    6000.00	        6000.00	        6000.000000
 team member	    1000.00	        4000.00	        3000.000000
 */
@@ -407,12 +407,12 @@ INSERT INTO employee VALUES('E203','Glenn antony','B122',2,'1/3/2020',4000);
 INSERT INTO employee VALUES('E204','Allen joseph','B123',7,'1/4/2020',5000);
 INSERT INTO employee VALUES('E205','Antony benjamin','B124',10,'1/5/2020',6000);
 /*
-Ecode	Ename	          Bcode	    Grade	Dt_in	    salary
-E201	Alvin lal	      B120	    1	    2020-01-01	2000.00
-E202	Amal tom	      B121	    2	    2020-01-02	3000.00
-E203	Glenn antony	  B122	    2	    2020-01-03	4000.00
-E204	Allen joseph	  B123	    7	    2020-01-04	5000.00
-E205	Antony benjamin	  B124	    10	    2020-01-05	6000.00
+Ecode	Ename	          Bcode	    Grade	Dt_in	        salary
+E201	Alvin lal	  B120	    1	        2020-01-01	2000.00
+E202	Amal tom	  B121	    2	        2020-01-02	3000.00
+E203	Glenn antony	  B122	    2	        2020-01-03	4000.00
+E204	Allen joseph	  B123	    7	        2020-01-04	5000.00
+E205	Antony benjamin	  B124	    10	        2020-01-05	6000.00
 */
 INSERT INTO branch VALUES('B120','puthencruz');
 INSERT INTO branch VALUES('B121','nilampur');
@@ -430,8 +430,8 @@ B124	vypin
 --1b--
 UPDATE employee SET Grade=5 WHERE Ecode='E201';
 /*
-Ecode	Ename	          Bcode	    Grade	Dt_in	    salary
-E201	Alvin lal	      B120	    5	    2020-01-01	2000.00
+Ecode	Ename	              Bcode	    Grade	Dt_in	        salary
+E201	Alvin lal	      B120	    5	        2020-01-01	2000.00
 */
 --2a--
 SELECT Ename FROM employee WHERE salary>(SELECT AVG(salary) FROM employee); 
@@ -444,22 +444,22 @@ Antony benjamin
 SELECT Ename,Bname,Grade FROM employee JOIN branch ON employee.Bcode=branch.Bcode;
 /*
 Ename	           Bname	    Grade
-Alvin lal	       puthencruz	5
-Amal tom	       nilampur	    2
+Alvin lal	   puthencruz	    5
+Amal tom	   nilampur	    2
 Glenn antony	   kochi	    2
-Allen joseph	   vaduthala	7
+Allen joseph	   vaduthala	    7
 Antony benjamin	   vypin	    10
 */
 --3--
 CREATE VIEW EMPBNAMEGRADEVIEW AS SELECT Ename,Grade FROM employee;
 SELECT * FROM EMPBNAMEGRADEVIEW;
 /*
-Ename	         Grade
+Ename	             Grade
 Alvin lal	     5
 Amal tom	     2
-Glenn antony	 2
-Allen joseph	 7
-Antony benjamin	 10
+Glenn antony	     2
+Allen joseph	     7
+Antony benjamin	     10
 */
 --3a--
 CREATE PROCEDURE GETGRADETWO AS SELECT Ename FROM employee WHERE Grade=2;
@@ -502,12 +502,12 @@ INSERT INTO movie VALUES(22,'Joker','horror','Joaquin phoenix',150);
 INSERT INTO movie VALUES(23,'CID moosa','comedy','Dileep',160);
 INSERT INTO movie VALUES(24,'Avengers endgame','action','Robert downey jr',130);
 /*
-Mvno	Title	            Type	    Star	             Price
-20	    Ford vsferrari	    action	    Christian bale	    130.00
-21	    Dhrishyam	        horror	    Mohanlal        	150.00
-22	    Joker	            horror	    Joaquin phoenix	    150.00
-23	    CID moosa	        comedy	    Dileep	            160.00
-24  	Avengers endgame	action	    Robert downey jr	130.00
+Mvno	    Title	            Type	    Star	             Price
+20	    Ford vsferrari	    action	    Christian bale	     130.00
+21	    Dhrishyam	            horror	    Mohanlal        	     150.00
+22	    Joker	            horror	    Joaquin phoenix	     150.00
+23	    CID moosa	            comedy	    Dileep	             160.00
+24  	    Avengers endgame	    action	    Robert downey jr	     130.00
 
 */
 INSERT INTO invoice VALUES(12,20,'15/3/2020');
@@ -516,23 +516,23 @@ INSERT INTO invoice VALUES(14,22,'15/5/2020');
 INSERT INTO invoice VALUES(15,23,'15/6/2020');
 INSERT INTO invoice VALUES(16,24,'15/7/2020');
 /*
-Invno	Mvno	Issue_date
-12	    20	    2020-03-15
-13	    21	    2020-04-15
-14	    22	    2020-05-15
-15	    23	    2020-06-15
-16	    24	    2020-07-15
+Invno	    Mvno	Issue_date
+12	    20	        2020-03-15
+13	    21	        2020-04-15
+14	    22	        2020-05-15
+15	    23	        2020-06-15
+16	    24	        2020-07-15
 */
 
 --1b--
 UPDATE movie SET Price=Price+10;
 /*
-Mvno	Title	            Type	    Star	             Price
+Mvno	    Title	            Type	    Star	            Price
 20	    Ford vs ferrari	    action	    Christian bale	    140.00
-21	    Dhrishyam	        horror	    Mohanlal	        160.00
+21	    Dhrishyam	            horror	    Mohanlal	            160.00
 22	    Joker	            horror	    Joaquin phoenix	    160.00
-23	    CID moosa	        comedy	    Dileep	            170.00
-24	    Avengers endgame	action	    Robert downey jr    140.00
+23	    CID moosa	            comedy	    Dileep	            170.00
+24	    Avengers endgame	    action	    Robert downey jr        140.00
 */
 
 --2a--
@@ -550,10 +550,10 @@ SELECT Title,Issue_date FROM movie JOIN invoice ON movie.Mvno=invoice.Mvno;
 /*
 Title	            Issue_date
 Ford vs ferrari	    2020-03-15
-Dhrishyam	        2020-04-15
+Dhrishyam	    2020-04-15
 Joker	            2020-05-15
-CID moosa	        2020-06-15
-Avengers endgame	2020-07-15
+CID moosa	    2020-06-15
+Avengers endgame    2020-07-15
 */
 --3--
 CREATE VIEW MOVIESTARVIEW AS SELECT star FROM movie ;
@@ -570,8 +570,8 @@ Robert downey jr
 CREATE PROCEDURE GETMTT AS SELECT Mvno,Title,Type FROM movie WHERE Star LIKE 'M%' ;
 EXEC GETMTT;
 /*
-Mvno	Title	    Type
-21	    Dhrishyam	horror
+Mvno	Title	        Type
+21	Dhrishyam	horror
 */
 --4b--
 CREATE PROCEDURE GETAVGPRICE AS SELECT Type,AVG(Price) AS AVGPRICE FROM movie GROUP BY Type ;
@@ -610,10 +610,10 @@ INSERT INTO persons VALUES(103,'johnson','joy','johnson villa','kottayam');
 INSERT INTO persons VALUES(104,'sachin','kumar','sachin villa','kollam');
 /*
 PID	        Fname	    Lname	    Address	        City
-100	        alvin	    lal	        alvin villa	    kochi
-101	        amal	    tom	        amal villa	    malapuram
-102	        glenn	    antony	    glenn villa	    kollam
-103	        johnson	    joy	        johnson villa	kottayam
+100	        alvin	    lal	            alvin villa	        kochi
+101	        amal	    tom	            amal villa	        malapuram
+102	        glenn	    antony	    glenn villa	        kollam
+103	        johnson	    joy	            johnson villa	kottayam
 104	        sachin	    kumar	    sachin villa	kollam
 */
 
@@ -668,7 +668,7 @@ CREATE PROCEDURE GETNAMEADDCITY AS SELECT Fname,Address,City FROM persons WHERE 
 EXEC GETNAMEADDCITY;
 /*
 Fname	Address	        City
-glenn	glenn villa	    kollam
+glenn	glenn villa	kollam
 sachin	sachin villa	kollam
 */
 --4b--
@@ -676,10 +676,10 @@ CREATE PROCEDURE GETPERSONSALPHA AS SELECT * FROM persons ORDER BY Fname ;
 EXEC GETPERSONSALPHA;
 /*
 PID	    Fname	    Lname	    Address	        City
-100	    alvin	    lal	        alvin villa	    kochi
-101	    amal	    tom	        amal villa	    malapuram
-102	    glenn	    antony	    glenn villa	    kollam
-103	    johnson	    joy	        johnson villa	kottayam
+100	    alvin	    lal	            alvin villa	        kochi
+101	    amal	    tom	            amal villa	        malapuram
+102	    glenn	    antony	    glenn villa	        kollam
+103	    johnson	    joy	            johnson villa	kottayam
 104	    sachin	    kumar	    sachin villa	kollam
 */
 
@@ -707,11 +707,11 @@ INSERT INTO customer VALUES('C347','alvin',1236,'alvin villa',987456123);
 INSERT INTO customer VALUES('C348','allen',1237,'allen villa',9207248664);
 INSERT INTO customer VALUES('C349','roshan',1238,'roshan villa',456789123);
 /*
-Cust_id 	Cust_name	    Acc_no	    Address	        Phone_No
+Cust_id     Cust_name	        Acc_no	    Address	        Phone_No
 C345	    glenn	        1234	    antony villa	NULL
-C346	    amal	        1235	    amal villa	    123456789
-C347	    alvin	        1236	    alvin villa	    987456123
-C348	    allen	        1237	    allen villa	    9207248664
+C346	    amal	        1235	    amal villa	        123456789
+C347	    alvin	        1236	    alvin villa	        987456123
+C348	    allen	        1237	    allen villa	        9207248664
 C349	    roshan	        1238	    roshan villa	456789123
 
 */
@@ -733,7 +733,7 @@ Acc_No	Amount
 UPDATE customer SET Address='glenn villa' WHERE Cust_id='C345';
 /*
 Cust_id	    Cust_name	Acc_no	Address	        Phone_No
-C345	    glenn	    1234	glenn villa	    NULL
+C345	    glenn	1234	glenn villa	 NULL
 */
 
 --2a--
@@ -741,16 +741,16 @@ C345	    glenn	    1234	glenn villa	    NULL
 SELECT * FROM customer WHERE Acc_no=(SELECT Acc_no FROM account WHERE Amount=(SELECT MAX(Amount) FROM account))
 /*
 Cust_id	    Cust_name	Acc_no	Address	        Phone_No
-C349	    roshan	    1238	roshan  villa	456789123
+C349	    roshan      1238	roshan  villa	456789123
 */
 --2b--
 SELECT * FROM customer ORDER BY Acc_no;
 /*
-Cust_id	Cust_name	Acc_no	    Address	        Phone_No
-C345	glenn	    1234	    glenn villa	    NULL
+Cust_id	Cust_name   Acc_no	    Address	        Phone_No
+C345	glenn	    1234	    glenn villa	        NULL
 C346	amal	    1235	    amal villa  	123456789
-C347	alvin	    1236	    alvin villa	    987456123
-C348	allen	    1237	    allen villa	    9207248664
+C347	alvin	    1236	    alvin villa	        987456123
+C348	allen	    1237	    allen villa	        9207248664
 C349	roshan	    1238	    roshan villa	456789123
 */
 --3--
@@ -806,12 +806,12 @@ INSERT INTO books VALUES(103,'Wings of fire','APJ Abdul kalam','biography','engl
 INSERT INTO books VALUES(104,'Sherlock holmes','Arthur conan doyle','mystery','english',240);
 INSERT INTO books VALUES(105,'The Alchemist','Paulo coelho','fantasy','portugese',200);
 /*
-book_id	    Title	            Author	            Type	    Language	Price
-101	        Aadujeevitham	    Benyamin	        novel	    malayalam	200
-102	        Adams life	        Adams john	        novel	    english	    250
-103 	    Wings of fire	    APJ Abdul kalam	    biography	english	    200
-104	        Sherlock holmes	    Arthur conan doyle	mystery 	english	    240
-105	        The Alchemist	    Paulo coelho	    fantasy	    portugese	200
+book_id	    Title	            Author	            Type	    Language	    Price
+101	    Aadujeevitham	    Benyamin	            novel	    malayalam	    200
+102	    Adams life	            Adams john	            novel	    english	    250
+103 	    Wings of fire	    APJ Abdul kalam	    biography	    english	    200
+104	    Sherlock holmes	    Arthur conan doyle	    mystery 	    english	    240
+105	    The Alchemist	    Paulo coelho	    fantasy	    portugese	    200
 
 */
 INSERT INTO customers VALUES(120,'alvin',101,100);
@@ -820,25 +820,25 @@ INSERT INTO customers VALUES(122,'glenn',103,160);
 INSERT INTO customers VALUES(123,'sachin',104,200);
 INSERT INTO customers VALUES(124,'allen',105,110);
 /*
-Cust_id	    Cust_name	book_id	    Dues
-120	        alvin	    101	        100
-121	        amal	    102	        150
-122	        glenn	    103	        160
-123	        sachin	    104	        200
-124	        allen	    105	        110
+Cust_id	       Cust_name	book_id	        Dues
+120	        alvin	        101	        100
+121	        amal	        102	        150
+122	        glenn	        103	        160
+123	        sachin	        104	        200
+124	        allen	        105	        110
 */
 --2--
 SELECT DISTINCT title,Language FROM books WHERE Type='novel';
 /*
 title	        Language
 Aadujeevitham	malayalam
-Adams life	    english
+Adams life      english
 */
 --3--
 SELECT * FROM books WHERE Author LIKE 'Adams%';
 /*
-book_id	    Title	        Author	    Type	Language	Price
-102	        Adams life	    Adam john	novel	english	    250
+book_id	    Title	    Author	    Type	Language	Price
+102	    Adams life	    Adams john	    novel	english	        250
 
 */
 SELECT Cust_name FROM customers ORDER BY Dues;
@@ -876,12 +876,12 @@ INSERT INTO items VALUES(102,'body wash','lux',120,200)
 INSERT INTO items VALUES(103,'soap','lifeboy',35,100)
 INSERT INTO items VALUES(104,'floor cleaner','dettol',30,100)
 /*
-item_id	      category	        brand	    Price	Weight
-100	          soap	            dettol	    30  	100
-101	          floor cleaner	    lizol	    100	    300
-102	          body wash	        lux	        120	    200
-103	          soap	            lifeboy	    35	    100
-104	          floor cleaner	    dettol	    30	    100
+item_id	      category	        brand	    Price   Weight
+100	      soap	        dettol	    30      100
+101	      floor cleaner	lizol	    100	    300
+102	      body wash	        lux	    120	    200
+103	      soap	        lifeboy	    35	    100
+104	      floor cleaner	dettol	    30	    100
 */
 INSERT INTO sales VALUES(120,100,'15/3/2020',10,300);
 INSERT INTO sales VALUES(121,101,'15/3/2020',10,1000);
@@ -889,7 +889,7 @@ INSERT INTO sales VALUES(122,102,'16/3/2020',4,500);
 INSERT INTO sales VALUES(123,103,'18/3/2020',17,600);
 INSERT INTO sales VALUES(124,104,'18/3/2020',3,100);
 /*
-sales_id	item_id        	date	        quantity	Amount
+sales_id	item_id             date	    quantity	Amount
 120	        100	            2020-03-15	    10	        300
 121	        101	            2020-03-15	    10	        1000
 122	        102	            2020-03-16	    4	        500
@@ -910,7 +910,7 @@ floor cleaner
 --3--
 SELECT date,quantity*Amount AS sales FROM sales;
 /*
-date	    sales
+date	        sales
 2020-03-15	3000
 2020-03-15	10000
 2020-03-16	2000
@@ -920,10 +920,11 @@ date	    sales
 --4--
 SELECT date,MAX(quantity*amount) AS MAXSALES FROM sales GROUP BY date;
 /*
-date	    MAXSALES
+date	        MAXSALES
 2020-03-15	10000
 2020-03-16	2000
 2020-03-18	10200
 */
+
 
 
