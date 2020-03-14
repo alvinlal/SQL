@@ -67,7 +67,7 @@ SELECT COUNT(*) FROM student WHERE Dept_id='120' ;
 */
 --3--
 CREATE VIEW STUDENTVIEW AS SELECT * FROM student ;
-SELECT * FROM STUDENTVIEW GO; --to display the view
+SELECT * FROM STUDENTVIEW ; --to display the view
 /*
 Roll_no  Name           Dept_id     Gender       Contact_no
 1	    alvin lal	    120	        M	         9207248664
@@ -77,7 +77,7 @@ Roll_no  Name           Dept_id     Gender       Contact_no
 5	    jasmine	        124	        F	         123456789
 */
 --4a--
-CREATE PROCEDURE GETNAMECONTACT AS SELECT Name,Contact_no FROM student GO;
+CREATE PROCEDURE GETNAMECONTACT AS SELECT Name,Contact_no FROM student ;
 EXEC GETNAMECONTACT;        --to execute the procedure
 /*
 Name            Contact_no
@@ -88,7 +88,7 @@ aliya	        9207248667
 jasmine	        123456789
 */
 --4b--
-CREATE PROCEDURE GETEMPTYDEPS AS SELECT Dept_name FROM department WHERE Dept_id NOT IN (SELECT Dept_id FROM student) GO;
+CREATE PROCEDURE GETEMPTYDEPS AS SELECT Dept_name FROM department WHERE Dept_id NOT IN (SELECT Dept_id FROM student) ;
 EXEC GETEMPTYDEPS;
 /*
 MECHANICAL
@@ -163,7 +163,7 @@ bale	123
 paulo	124
 */
 --3--
-CREATE VIEW CUSTOMERVIEW AS SELECT * FROM customer GO;
+CREATE VIEW CUSTOMERVIEW AS SELECT * FROM customer ;
 SELECT * FROM CUSTOMERVIEW;
 /*
 Cust_id	Fname	    Lname	    Area	    Phone_number
@@ -175,7 +175,7 @@ Cust_id	Fname	    Lname	    Area	    Phone_number
 */
 
 --4a--
-CREATE PROCEDURE GETLNAMEPB AS SELECT Lname FROM customer WHERE Fname LIKE 'p%' OR Fname LIKE 'b%' GO;
+CREATE PROCEDURE GETLNAMEPB AS SELECT Lname FROM customer WHERE Fname LIKE 'p%' OR Fname LIKE 'b%' ;
 EXEC GETLNAMEPB;
 /*
 Lname
@@ -185,7 +185,7 @@ dybala
 */
 
 --4b--
-CREATE PROCEDURE GETCUSTDETAILS AS SELECT * FROM customer ORDER BY Fname ASC GO;
+CREATE PROCEDURE GETCUSTDETAILS AS SELECT * FROM customer ORDER BY Fname ASC ;
 EXEC GETCUSTDETAILS;
 /*
 Cust_id	Fname	    Lname	    Area	    Phone_number
@@ -256,7 +256,7 @@ SELECT Orderno FROM sales JOIN customer ON customer.Cno=sales.Cno AND customer.C
 2
 */
 --3--
-CREATE VIEW CUSTOMERVIEW AS SELECT * FROM customer GO;
+CREATE VIEW CUSTOMERVIEW AS SELECT * FROM customer ;
 SELECT * FROM CUSTOMERVIEW ;
 /*
 Cno     Cname   Address         City
@@ -267,8 +267,8 @@ Cno     Cname   Address         City
 104	    jay	    NULL	        alapuzha
 */
 --4a--
-CREATE PROCEDURE GETDISNAMEA AS SELECT DISTINCT Cname FROM customer WHERE Cname LIKE 'A%' GO;
-EXEC GETDISNAMEA GO;
+CREATE PROCEDURE GETDISNAMEA AS SELECT DISTINCT Cname FROM customer WHERE Cname LIKE 'A%' ;
+EXEC GETDISNAMEA ;
 /*
 Cname
 alvin
@@ -365,7 +365,7 @@ eno	    name	 designation	    salary
 104	    Basil	 manager	        10000.00
 */
 --4a--
-CREATE PROCEDURE GETSALARY5000 AS SELECT name FROM employee WHERE salary<5000 GO;
+CREATE PROCEDURE GETSALARY5000 AS SELECT name FROM employee WHERE salary<5000 ;
 EXEC GETSALARY5000 ;
 /*
 name
@@ -374,7 +374,7 @@ Alvin
 Rivin
 */
 --4b--
-CREATE PROCEDURE GETMINMAXAVG AS SELECT designation,MIN(salary) AS MINIMUMSALARY,MAX(salary) AS MAXIMUMSALARY ,AVG(salary) AS AVGSALARY FROM employee GROUP BY designation GO;
+CREATE PROCEDURE GETMINMAXAVG AS SELECT designation,MIN(salary) AS MINIMUMSALARY,MAX(salary) AS MAXIMUMSALARY ,AVG(salary) AS AVGSALARY FROM employee GROUP BY designation ;
 EXEC GETMINMAXAVG;
 /*
 designation	    MINIMUMSALARY	MAXIMUMSALARY	AVGSALARY
@@ -470,7 +470,7 @@ Amal tom
 Glenn antony
 */
 --3b--
-CREATE PROCEDURE GETSALARY3K5k AS SELECT Ename FROM employee WHERE salary BETWEEN 3000 AND 5000;
+CREATE PROCEDURE GETSALARY3K5k AS SELECT Ename FROM employee WHERE salary BETWEEN 3000 AND 5000 ;
 EXEC GETSALARY3K5k;
 /*
 Ename
@@ -478,8 +478,449 @@ Amal tom
 Glenn antony
 Allen joseph
 */
+--QUESTION NO 6--
+CREATE DATABASE SIXMOVIE;
+USE SIXMOVIE;
+
+CREATE TABLE movie(
+    Mvno   NUMERIC(2)  CONSTRAINT pk_movie_Mvno PRIMARY KEY,
+    Title  VARCHAR(25) CONSTRAINT unique_movie_Title UNIQUE NOT NULL,
+    Type   VARCHAR(10) CONSTRAINT check_movie_Type CHECK(Type='comedy' OR Type='action' OR Type='horror'),
+    Star   VARCHAR(25),
+    Price  NUMERIC(10,2)
+)
+
+CREATE TABLE invoice(
+    Invno       NUMERIC(2)  CONSTRAINT pk_invoice_Invno PRIMARY KEY,
+    Mvno        NUMERIC(2)  CONSTRAINT fk_invoice_Mvno  FOREIGN KEY REFERENCES movie(Mvno),
+    Issue_date  Date,
+)
+--1a--
+INSERT INTO movie VALUES(20,'Ford vs ferrari','action','Christian bale',130);
+INSERT INTO movie VALUES(21,'Dhrishyam','horror','Mohanlal',150);
+INSERT INTO movie VALUES(22,'Joker','horror','Joaquin phoenix',150);
+INSERT INTO movie VALUES(23,'CID moosa','comedy','Dileep',160);
+INSERT INTO movie VALUES(24,'Avengers endgame','action','Robert downey jr',130);
+/*
+Mvno	Title	            Type	    Star	             Price
+20	    Ford vsferrari	    action	    Christian bale	    130.00
+21	    Dhrishyam	        horror	    Mohanlal        	150.00
+22	    Joker	            horror	    Joaquin phoenix	    150.00
+23	    CID moosa	        comedy	    Dileep	            160.00
+24  	Avengers endgame	action	    Robert downey jr	130.00
+
+*/
+INSERT INTO invoice VALUES(12,20,'15/3/2020');
+INSERT INTO invoice VALUES(13,21,'15/4/2020');
+INSERT INTO invoice VALUES(14,22,'15/5/2020');
+INSERT INTO invoice VALUES(15,23,'15/6/2020');
+INSERT INTO invoice VALUES(16,24,'15/7/2020');
+/*
+Invno	Mvno	Issue_date
+12	    20	    2020-03-15
+13	    21	    2020-04-15
+14	    22	    2020-05-15
+15	    23	    2020-06-15
+16	    24	    2020-07-15
+*/
+
+--1b--
+UPDATE movie SET Price=Price+10;
+/*
+Mvno	Title	            Type	    Star	             Price
+20	    Ford vs ferrari	    action	    Christian bale	    140.00
+21	    Dhrishyam	        horror	    Mohanlal	        160.00
+22	    Joker	            horror	    Joaquin phoenix	    160.00
+23	    CID moosa	        comedy	    Dileep	            170.00
+24	    Avengers endgame	action	    Robert downey jr    140.00
+*/
+
+--2a--
+SELECT Title FROM movie ORDER BY Title;
+/*
+Title
+Avengers endgame
+CID moosa
+Dhrishyam
+Ford vs ferrari
+Joker
+*/
+--2b--
+SELECT Title,Issue_date FROM movie JOIN invoice ON movie.Mvno=invoice.Mvno;
+/*
+Title	            Issue_date
+Ford vs ferrari	    2020-03-15
+Dhrishyam	        2020-04-15
+Joker	            2020-05-15
+CID moosa	        2020-06-15
+Avengers endgame	2020-07-15
+*/
+--3--
+CREATE VIEW MOVIESTARVIEW AS SELECT star FROM movie ;
+SELECT * FROM MOVIESTARVIEW
+/*
+star
+Christian bale
+Mohanlal
+Joaquin phoenix
+Dileep
+Robert downey jr
+*/
+--4a--
+CREATE PROCEDURE GETMTT AS SELECT Mvno,Title,Type FROM movie WHERE Star LIKE 'M%' ;
+EXEC GETMTT;
+
+--4b--
+CREATE PROCEDURE GETAVGPRICE AS SELECT Type,AVG(Price) AS AVGPRICE FROM movie GROUP BY Type ;
+EXEC GETAVGPRICE;
+/*
+Type	AVGPRICE
+action	140.000000
+comedy	170.000000
+horror	160.000000
+*/
 
 
+--QUESTION NO 5--
+CREATE DATABASE SEVENSUPERMARKET;
+USE SEVENSUPERMARKET;
 
+CREATE TABLE persons(
+      PID       NUMERIC(5)   CONSTRAINT pk_persons_PID PRIMARY KEY,
+      Fname     VARCHAR(15)  NOT NULL,
+      Lname     VARCHAR(15),
+      Address   VARCHAR(20),
+      City      VARCHAR(10)  
+);
+
+CREATE TABLE orders(
+      OID       NUMERIC(5) CONSTRAINT pk_order_OID PRIMARY KEY,
+      ORDERQTY  NUMERIC(5) NOT NULL,
+      ORDERDATE Date,
+      PID       NUMERIC(5) CONSTRAINT fk_order_PID FOREIGN KEY REFERENCES persons(PID)
+);
+--1a--
+INSERT INTO persons VALUES(100,'alvin','lal','alvin villa','kochi');
+INSERT INTO persons VALUES(101,'amal','tom','amal villa','malapuram');
+INSERT INTO persons VALUES(102,'glenn','antony','glenn villa','kollam');
+INSERT INTO persons VALUES(103,'johnson','joy','johnson villa','kottayam');
+INSERT INTO persons VALUES(104,'sachin','kumar','sachin villa','kollam');
+/*
+PID	        Fname	    Lname	    Address	        City
+100	        alvin	    lal	        alvin villa	    kochi
+101	        amal	    tom	        amal villa	    malapuram
+102	        glenn	    antony	    glenn villa	    kollam
+103	        johnson	    joy	        johnson villa	kottayam
+104	        sachin	    kumar	    sachin villa	kollam
+*/
+
+INSERT INTO orders VALUES(578,3,'15/4/2019',100);
+INSERT INTO orders VALUES(579,4,'15/5/2019',101);
+INSERT INTO orders VALUES(580,2,'15/6/2019',102);
+INSERT INTO orders VALUES(581,5,'9/6/2019',103);
+INSERT INTO orders VALUES(582,8,'15/6/2019',104);
+/*
+OID	    ORDERQTY	ORDERDATE	    PID
+578	    3	        2019-04-15	    100
+579	    4	        2019-05-15	    101
+580	    2	        2019-06-15	    102
+581	    5	        2019-06-09	    103
+582	    8	        2019-06-15	    104
+
+*/
+--1b--
+UPDATE orders SET ORDERQTY=10 WHERE OID=578;
+/*
+OID	    ORDERQTY	ORDERDATE	PID
+578	    10	        2019-04-15	100
+*/
+
+--2a--
+SELECT * FROM orders WHERE ORDERDATE<'9/6/2019';
+/*
+OID	    ORDERQTY	ORDERDATE	    PID
+578	    10	        2019-04-15	    100
+579	    4	        2019-05-15	    101
+*/
+--2b--
+SELECT * FROM orders  WHERE PID IN(SELECT PID FROM persons WHERE Fname='johnson'); --This is another method without using join
+/*
+OID	    ORDERQTY	ORDERDATE	PID
+581	    5	        2019-06-09	103
+*/
+--3--
+CREATE VIEW ORDERDATEVIEW AS SELECT ORDERDATE FROM orders;
+SELECT * FROM ORDERDATEVIEW
+/*
+ORDERDATE
+2019-04-15
+2019-05-15
+2019-06-15
+2019-06-09
+2019-06-15
+*/
+
+--4a--
+CREATE PROCEDURE GETNAMEADDCITY AS SELECT Fname,Address,City FROM persons WHERE City='kollam' ;
+EXEC GETNAMEADDCITY;
+/*
+Fname	Address	        City
+glenn	glenn villa	    kollam
+sachin	sachin villa	kollam
+*/
+--4b--
+CREATE PROCEDURE GETPERSONSALPHA AS SELECT * FROM persons ORDER BY Fname ;
+EXEC GETPERSONSALPHA;
+/*
+PID	    Fname	    Lname	    Address	        City
+100	    alvin	    lal	        alvin villa	    kochi
+101	    amal	    tom	        amal villa	    malapuram
+102	    glenn	    antony	    glenn villa	    kollam
+103	    johnson	    joy	        johnson villa	kottayam
+104	    sachin	    kumar	    sachin villa	kollam
+*/
+
+--QUESTION NO 8--
+CREATE DATABASE EIGHTCUSTOMER;
+USE EIGHTCUSTOMER;
+
+CREATE TABLE customer(
+    Cust_id     VARCHAR(10) CONSTRAINT pk_customer_Cust_id PRIMARY KEY,
+    Cust_name   VARCHAR(25) NOT NULL,
+    Acc_no      NUMERIC(10) CONSTRAINT fk_customer_Acc_no FOREIGN KEY REFERENCES account(Acc_no),
+    Address     VARCHAR(25),
+    Phone_No    NUMERIC(10)
+)
+
+CREATE TABLE account(
+    Acc_No      NUMERIC(10)   CONSTRAINT pk_account_Acc_no PRIMARY KEY,
+    Amount      NUMERIC(10,2) 
+)
+
+--1a--
+INSERT INTO customer VALUES('C345','glenn',1234,'antony villa',null);
+INSERT INTO customer VALUES('C346','amal',1235,'amal villa',123456789);
+INSERT INTO customer VALUES('C347','alvin',1236,'alvin villa',987456123);
+INSERT INTO customer VALUES('C348','allen',1237,'allen villa',9207248664);
+INSERT INTO customer VALUES('C349','roshan',1238,'roshan villa',456789123);
+/*
+Cust_id 	Cust_name	    Acc_no	    Address	        Phone_No
+C345	    glenn	        1234	    antony villa	NULL
+C346	    amal	        1235	    amal villa	    123456789
+C347	    alvin	        1236	    alvin villa	    987456123
+C348	    allen	        1237	    allen villa	    9207248664
+C349	    roshan	        1238	    roshan villa	456789123
+
+*/
+
+INSERT INTO account VALUES(1234,1000.25);
+INSERT INTO account VALUES(1235,3000.50);
+INSERT INTO account VALUES(1236,6000.20);
+INSERT INTO account VALUES(1237,8000.50);
+INSERT INTO account VALUES(1238,11000.23);
+/*
+Acc_No	Amount
+1234	1000.25
+1235	3000.50
+1236	6000.20
+1237	8000.50
+1238	11000.23
+*/
+--1b--
+UPDATE customer SET Address='glenn villa' WHERE Cust_id='C345';
+/*
+Cust_id	    Cust_name	Acc_no	Address	        Phone_No
+C345	    glenn	    1234	glenn villa	    NULL
+*/
+
+--2a--
+
+SELECT * FROM customer WHERE Acc_no=(SELECT Acc_no FROM account WHERE Amount=(SELECT MAX(Amount) FROM account))
+/*
+Cust_id	    Cust_name	Acc_no	Address	        Phone_No
+C349	    roshan	    1238	roshan  villa	456789123
+*/
+--2b--
+SELECT * FROM customer ORDER BY Acc_no;
+/*
+Cust_id	Cust_name	Acc_no	    Address	        Phone_No
+C345	glenn	    1234	    glenn villa	    NULL
+C346	amal	    1235	    amal villa  	123456789
+C347	alvin	    1236	    alvin villa	    987456123
+C348	allen	    1237	    allen villa	    9207248664
+C349	roshan	    1238	    roshan villa	456789123
+*/
+--3--
+CREATE VIEW GETACCNO AS SELECT Acc_no FROM customer;
+SELECT * FROM GETACCNO;
+/*
+Acc_no
+1234
+1235
+1236
+1237
+1238
+*/
+
+--4a--
+CREATE PROCEDURE GETNULLPHONE AS SELECT Cust_name FROM customer WHERE Phone_no IS NULL ;
+EXEC GETNULLPHONE;
+/*
+Cust_name
+glenn
+*/
+--4b--
+CREATE PROCEDURE GETTOTALAMT AS SELECT SUM(Amount) FROM account ;
+EXEC GETTOTALAMT;
+/*
+29001.68
+*/
+
+--QUESTION NO 9--
+CREATE DATABASE NINEBOOKS;
+USE NINEBOOKS;
+
+CREATE TABLE books(
+    book_id     NUMERIC(10) CONSTRAINT pk_books_book_id PRIMARY KEY,
+    Title       VARCHAR(20) NOT NULL,
+    Author      VARCHAR(20) NOT NULL,
+    Type        VARCHAR(20) CONSTRAINT check_books_book_tyep CHECK(Type='novel' OR Type='mystery' OR Type='fantasy' OR Type='biography' OR Type='travelogue'),
+    Language    VARCHAR(20),
+    Price       NUMERIC(5)
+)
+
+CREATE TABLE customers(
+    Cust_id    VARCHAR(10) CONSTRAINT pk_customers_Cust_id PRIMARY KEY,
+    Cust_name  VARCHAR(20) NOT NULL,
+    book_id    NUMERIC(10) CONSTRAINT fk_customers_book_id FOREIGN KEY REFERENCES books(book_id),
+    Dues       NUMERIC(10)
+)
+DROP TABLE customers;
+--1--
+INSERT INTO books VALUES(101,'Aadujeevitham','Benyamin','novel','malayalam',200);
+INSERT INTO books VALUES(102,'Adams life','Adams john','novel','english',250);
+INSERT INTO books VALUES(103,'Wings of fire','APJ Abdul kalam','biography','english',200);
+INSERT INTO books VALUES(104,'Sherlock holmes','Arthur conan doyle','mystery','english',240);
+INSERT INTO books VALUES(105,'The Alchemist','Paulo coelho','fantasy','portugese',200);
+/*
+book_id	    Title	            Author	            Type	    Language	Price
+101	        Aadujeevitham	    Benyamin	        novel	    malayalam	200
+102	        Adams life	        Adams john	        novel	    english	    250
+103 	    Wings of fire	    APJ Abdul kalam	    biography	english	    200
+104	        Sherlock holmes	    Arthur conan doyle	mystery 	english	    240
+105	        The Alchemist	    Paulo coelho	    fantasy	    portugese	200
+
+*/
+INSERT INTO customers VALUES(120,'alvin',101,100);
+INSERT INTO customers VALUES(121,'amal',102,150);
+INSERT INTO customers VALUES(122,'glenn',103,160);
+INSERT INTO customers VALUES(123,'sachin',104,200);
+INSERT INTO customers VALUES(124,'allen',105,110);
+/*
+Cust_id	    Cust_name	book_id	    Dues
+120	        alvin	    101	        100
+121	        amal	    102	        150
+122	        glenn	    103	        160
+123	        sachin	    104	        200
+124	        allen	    105	        110
+*/
+--2--
+SELECT DISTINCT title,Language FROM books WHERE Type='novel';
+/*
+title	        Language
+Aadujeevitham	malayalam
+Adams life	    english
+*/
+--3--
+SELECT * FROM books WHERE Author LIKE 'Adams%';
+/*
+book_id	    Title	        Author	    Type	Language	Price
+102	        Adams life	    Adam john	novel	english	    250
+
+*/
+SELECT Cust_name FROM customers ORDER BY Dues;
+/*
+Cust_name
+alvin
+allen
+amal
+glenn
+sachin
+*/
+--QUESTION 10--
+CREATE DATABASE TENSUPERMARKET;
+USE TENSUPERMARKET;
+--1--
+CREATE TABLE items(
+    item_id NUMERIC(5)  CONSTRAINT pk_items_item_id PRIMARY KEY,
+    category   VARCHAR(20) NOT NULL,
+    brand   VARCHAR(20),
+    Price   NUMERIC(10) NOT NULL,
+    Weight  NUMERIC(10),
+)
+
+CREATE TABLE sales(
+    sales_id NUMERIC(5)  CONSTRAINT pk_sales_sales_id PRIMARY KEY,
+    item_id  NUMERIC(5)  CONSTRAINT fk_sales_item_id  FOREIGN KEY REFERENCES items(item_id),
+    date     date,
+    quantity NUMERIC(10) NOT NULL,
+    Amount   NUMERIC(10) NOT NULL,
+)
+
+INSERT INTO items VALUES(100,'soap','dettol',30,100)
+INSERT INTO items VALUES(101,'floor cleaner','lizol',100,300)
+INSERT INTO items VALUES(102,'body wash','lux',120,200)
+INSERT INTO items VALUES(103,'soap','lifeboy',35,100)
+INSERT INTO items VALUES(104,'floor cleaner','dettol',30,100)
+/*
+item_id	      category	        brand	    Price	Weight
+100	          soap	            dettol	    30  	100
+101	          floor cleaner	    lizol	    100	    300
+102	          body wash	        lux	        120	    200
+103	          soap	            lifeboy	    35	    100
+104	          floor cleaner	    dettol	    30	    100
+*/
+INSERT INTO sales VALUES(120,100,'15/3/2020',10,300);
+INSERT INTO sales VALUES(121,101,'15/3/2020',10,1000);
+INSERT INTO sales VALUES(122,102,'16/3/2020',4,500);
+INSERT INTO sales VALUES(123,103,'18/3/2020',17,600);
+INSERT INTO sales VALUES(124,104,'18/3/2020',3,100);
+/*
+sales_id	item_id        	date	        quantity	Amount
+120	        100	            2020-03-15	    10	        300
+121	        101	            2020-03-15	    10	        1000
+122	        102	            2020-03-16	    4	        500
+123	        103	            2020-03-18	    17	        600
+124	        104	            2020-03-18	    3	        100
+
+*/
+--2--
+SELECT category FROM items;
+/*
+category
+soap
+floor cleaner
+body wash
+soap
+floor cleaner
+*/
+--3--
+SELECT date,quantity*Amount AS sales FROM sales;
+/*
+date	    sales
+2020-03-15	3000
+2020-03-15	10000
+2020-03-16	2000
+2020-03-18	10200
+2020-03-18	300
+*/
+--4--
+SELECT date,MAX(quantity*amount) AS MAXSALES FROM sales GROUP BY date;
+/*
+date	    MAXSALES
+2020-03-15	10000
+2020-03-16	2000
+2020-03-18	10200
+*/
 
 
