@@ -153,7 +153,7 @@ Issue_date
 2008-07-24
 */
 --2b--
-SELECT Fname,Inv_no FROM invoice JOIN customer ON customer.Cust_id=invoice.Cust_id;
+SELECT Fname,Inv_no FROM invoice JOIN customer ON customer.Cust_id=invoice.Cust_id; // SELECT Fname,Lname,Inv_no FROM customer,invoice WHERE customer.Cust_id=invoice.Cust_id; 
 /*
 Fname    Inv_no
 lionel	 120
