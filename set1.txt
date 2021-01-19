@@ -251,7 +251,8 @@ SELECT COUNT(*)  FROM sales WHERE Orderdate>'3/3/2012';
 2
 */
 --2b--
-SELECT Orderno FROM sales JOIN customer ON customer.Cno=sales.Cno AND customer.Cname='jay'
+SELECT Orderno FROM sales JOIN customer ON customer.Cno=sales.Cno AND customer.Cname='jay' //SELECT orderno FROM sales WHERE Cno IN (SELECT Cno FROM customer WHERE Cname = 'jay');
+
 /*
 2
 */
